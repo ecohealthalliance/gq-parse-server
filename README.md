@@ -32,7 +32,7 @@ See https://github.com/ParsePlatform/parse-server/wiki/Push
 
 ## Installation
 ```
-git clone https://github.com/dan-nyanko/localparse#master
+git clone https://github.com/dan-nyanko/example-parse-server#master
 npm install
 ```
 
