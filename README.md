@@ -1,4 +1,4 @@
-# localparse
+# example-parse-server
 
 Run parse-server with verbose logging
 
