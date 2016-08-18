@@ -21,6 +21,15 @@ Run parse-server with verbose logging
       "senderId": "03124141234",
       "apiKey": "asdfasdfasfasasdfasd"
     }
+  },
+  "filesAdapter": {
+    "module": "parse-server-s3-adapter",
+    "options": {
+      "accessKey": "asdfasdfasdfasdf",
+      "secretKey": "asdfasdfasdfasdfadsfdasdfasdfasdfas",
+      "bucket": "my-bucket",
+      "region": "us-east-1"
+    }
   }
 }
 ```
@@ -28,6 +37,10 @@ Run parse-server with verbose logging
 ## Certs
 
 See https://github.com/ParsePlatform/parse-server/wiki/Push
+
+## S3 Adapter
+
+See https://github.com/parse-server-modules/parse-server-s3-adapter
 
 
 ## Installation
@@ -40,3 +53,12 @@ npm install
 ```
 npm start
 ```
+
+## Test Cloud Code
+```
+curl -X POST \
+  -H "X-Parse-Application-Id: localParse" \
+  -H "X-Parse-Master-Key: secret" \
+  -H "Content-Type: application/json" \
+  http://localhost:1337/parse/functions/hello
+````

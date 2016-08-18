@@ -8,6 +8,7 @@
   "dependencies": {
     "express": "^4.13.4",
     "mongodb-runner": "^3.3.2",
-    "parse-server": "^2.2.11"
+    "parse-server": "^2.2.11",
+    "parse-server-s3-adapter": "^1.0.4"
   }
 }
