@@ -1,6 +1,11 @@
 # example-parse-server
 
-Run parse-server with verbose logging
+Example of running parse-server with:
+ - verbose logging
+ - Babel transpiler
+ - cloud code
+ - S3 adapter
+ - custom mailgun templates
 
 ## Create settings.json
 ```
@@ -14,7 +19,7 @@ Run parse-server with verbose logging
   "push": {
     "ios": {
       "pfx": "./certs/PushProductionCert.p12",
-      "bundleId": "com.super.cool.project",
+      "bundleId": "com.cool.super.project",
       "production": false
     },
     "android": {
@@ -30,6 +35,15 @@ Run parse-server with verbose logging
       "bucket": "my-bucket",
       "region": "us-east-1"
     }
+  },
+  "emailAdapter": {
+    "module": "parse-server-mailgun",
+    "options": {
+      "fromAddress": "project.super@cool.com",
+      "domain": "cool.com",
+      "apiKey": "asdfasdfasdfasdfadsfdasdfasdfasdfas",
+      "templates" : {}
+    }
   }
 }
 ```
@@ -42,6 +56,9 @@ See https://github.com/ParsePlatform/parse-server/wiki/Push
 
 See https://github.com/parse-server-modules/parse-server-s3-adapter
 
+## Mailgun Adapter
+
+See https://github.com/sebsylvester/parse-server-mailgun
 
 ## Installation
 ```
@@ -57,8 +74,9 @@ npm start
 ## Test Cloud Code
 ```
 curl -X POST \
-  -H "X-Parse-Application-Id: localParse" \
-  -H "X-Parse-Master-Key: secret" \
-  -H "Content-Type: application/json" \
-  http://localhost:1337/parse/functions/hello
+  -H 'X-Parse-Application-Id: localParse' \
+  -H 'X-Parse-Master-Key: secret' \
+  -H 'Content-Type: application/json' \
+  -d '{"message": "hello"}' \
+  http://localhost:1337/parse/functions/echo
 ````
