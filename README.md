@@ -1,7 +1,6 @@
-# example-parse-server
+# gq-parse-server
 
-Example of running parse-server with:
- - verbose logging
+Custom parse-server for GoodQuestion app:
  - Babel transpiler
  - cloud code
  - S3 adapter
@@ -62,7 +61,7 @@ See https://github.com/sebsylvester/parse-server-mailgun
 
 ## Installation
 ```
-git clone https://github.com/dan-nyanko/example-parse-server#master
+git clone https://github.com/ecohealthalliance/gq-parse-server/#master
 npm install
 ```
 
