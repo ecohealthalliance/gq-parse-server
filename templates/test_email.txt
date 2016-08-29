@@ -1,0 +1,7 @@
+Hi {{username}},
+
+This is a test.
+
+
+The GoodQuestion Team
+https://apps.eha.io
