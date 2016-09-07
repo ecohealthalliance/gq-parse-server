@@ -4,11 +4,12 @@ Custom parse-server for GoodQuestion app:
  - Babel transpiler
  - cloud code
  - S3 adapter
- - custom mailgun templates
+ - custom AmazonSES email templates
 
 ## Create settings.json
 ```
 {
+  "verbose": true,
   "serverURL": "http://localhost:1337/parse",
   "databaseURI": "mongodb://localhost:27017/localparse",
   "cloud": "./cloud/main.js",
@@ -36,11 +37,12 @@ Custom parse-server for GoodQuestion app:
     }
   },
   "emailAdapter": {
-    "module": "parse-server-mailgun",
+    "module": "parse-server-amazon-ses-email-adapter",
     "options": {
-      "fromAddress": "project.super@cool.com",
-      "domain": "cool.com",
-      "apiKey": "asdfasdfasdfasdfadsfdasdfasdfasdfas",
+      fromAddress: 'Your Name <noreply@supercoolapp.com>',
+      accessKeyId: 'Your AWS IAM Access Key ID',
+      secretAccessKey: 'Your AWS IAM Secret Access Key',
+      region: 'Your AWS Region',
       "templates" : {}
     }
   }
@@ -55,9 +57,9 @@ See https://github.com/ParsePlatform/parse-server/wiki/Push
 
 See https://github.com/parse-server-modules/parse-server-s3-adapter
 
-## Mailgun Adapter
+## AmazonSES Email Adapter
 
-See https://github.com/sebsylvester/parse-server-mailgun
+See https://github.com/ecohealthalliance/parse-server-amazon-ses-email-adapter
 
 ## Installation
 ```
@@ -68,6 +70,10 @@ npm install
 ## Start
 ```
 npm start
+```
+### Start in Development mode
+```
+npm run dev
 ```
 
 ## Test Cloud Code
