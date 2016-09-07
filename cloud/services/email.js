@@ -40,11 +40,14 @@ export function sendForgotPassword(user, forgotPassword, done) {
     done(new Error('Invalid mail adapter.'));
     return;
   }
-  const promise = adapter.send({
+  const username = user.get('username');
+  const token = forgotPassword.id;
+  const link = `${settings.emailAdapter.redirectUrl}/verifyForgotPassword?email=${username}&token=${token}`;
+  adapter.send({
     templateName: 'forgotPasswordEmail',
     fromAddress: settings.emailAdapter.fromAddress,
-    recipient: user.get('username'),
-    variables: { username: user.get('username'), token: forgotPassword.id },
+    recipient: username,
+    variables: { username, token, link },
   }).then(
     (body) => {
       done(null, body);

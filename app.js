@@ -36,6 +36,16 @@ const api = new ParseServer(settings);
 // Serve the Parse API at /parse URL prefix
 app.use('/parse', api);
 
+// Redirect to custom scheme; this prevents Gmail and other email clients from
+// removing schema that is not http/https.
+// See: http://stackoverflow.com/questions/23575553/ios-deep-linking-is-stripped-out-in-gmail
+app.get('/verifyForgotPassword', (req, res) => {
+  const email = encodeURIComponent(req.query.email);
+  const token = encodeURIComponent(req.query.token);
+  const url = `${settings.emailAdapter.customScheme}/verifyForgotPassword?email=${email}&token=${token}`;
+  return res.redirect(url);
+});
+
 const port = 1337;
 app.listen(port, function() {
   console.log(`parse-server-example running on port: ${port}`);
