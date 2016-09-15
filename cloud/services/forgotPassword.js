@@ -1,4 +1,4 @@
-import { ForgotPassword, STATUS } from '../models/forgotPassword';
+import { ForgotPassword } from '../models/ForgotPassword';
 
 /**
  * Gets the User from a specified username
