@@ -41,8 +41,8 @@ app.use('/parse', api);
 // See: http://stackoverflow.com/questions/23575553/ios-deep-linking-is-stripped-out-in-gmail
 app.get('/verifyForgotPassword', (req, res) => {
   const email = encodeURIComponent(req.query.email);
-  const token = encodeURIComponent(req.query.token);
-  const url = `${settings.emailAdapter.customScheme}/verifyForgotPassword?email=${email}&token=${token}`;
+  const token = encodeURIComponent(req.query.code);
+  const url = `${settings.emailAdapter.customScheme}/verifyForgotPassword?email=${email}&code=${code}`;
   return res.redirect(url);
 });
 
