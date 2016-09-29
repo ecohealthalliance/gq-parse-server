@@ -45,7 +45,7 @@ Parse.Cloud.define('testEmail', (request, response) => {
 });
 
 /**
- * creates a forgotPassword token and sends email to address specified
+ * creates a forgotPassword code and sends email to address specified
  *
  * @param {string} request.params.email, the email address to send
  */
@@ -74,10 +74,10 @@ Parse.Cloud.define('createForgotPassword', (request, response) => {
 });
 
 /**
- * verifies a forgotPassword token and set the password to the value specified
+ * verifies a forgotPassword code and set the password to the value specified
  *
  * @param {string} request.params.email, the email address of the user
- * @param {string} request.params.token, the forgotPassword token
+ * @param {string} request.params.code, the forgotPassword code
  * @param {string} request.params.newPassword, the new password for the account
  */
 Parse.Cloud.define('verifyForgotPassword', (request, response) => {
@@ -92,15 +92,15 @@ Parse.Cloud.define('verifyForgotPassword', (request, response) => {
     },
     // get the forgotPassword object
     getForgotPassword: ['getUser', (results, cb) => {
-      getForgotPassword(request.params.token, cb);
+      getForgotPassword(request.params.code, cb);
     }],
-    // validate that the forgotPassword token belongs to the user and hasn't been used
+    // validate that the forgotPassword code belongs to the user and hasn't been used
     validate: ['getForgotPassword', (results, cb) => {
       const forgotPassword = results.getForgotPassword;
       if (forgotPassword.validate(results.getUser.id)) {
         cb(null, true);
       } else {
-        cb('Expired token.');
+        cb('Expired code.');
       }
     }],
     // authenticate against openam as an admin
