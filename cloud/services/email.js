@@ -41,13 +41,13 @@ export function sendForgotPassword(user, forgotPassword, done) {
     return;
   }
   const username = user.get('username');
-  const token = forgotPassword.id;
-  const link = `${settings.emailAdapter.redirectUrl}/verifyForgotPassword?email=${username}&token=${token}`;
+  const code = forgotPassword.id;
+  const link = `${settings.emailAdapter.redirectUrl}/verifyForgotPassword?email=${username}&code=${code}`;
   adapter.send({
     templateName: 'forgotPasswordEmail',
     fromAddress: settings.emailAdapter.fromAddress,
     recipient: username,
-    variables: { username, token, link },
+    variables: { username, code, link },
   }).then(
     (body) => {
       done(null, body);
