@@ -2,18 +2,18 @@ import { ForgotPassword } from '../models/ForgotPassword';
 
 /**
  * Gets the User from a specified username
- * @param {string} token, the id of the ForgotPassword record
+ * @param {string} code, the id of the ForgotPassword record
  * @param {function} done, Callback function which returns a Parse.User object or error
  */
-export function getForgotPassword(token, done) {
+export function getForgotPassword(code, done) {
   const query = new Parse.Query(ForgotPassword);
-  query.get(token)
+  query.get(code)
   .then(
     (forgotPassword) => {
       if (forgotPassword) {
         return done(null, forgotPassword);
       }
-      done('Invalid token ID.');
+      done('Invalid code ID.');
     },
     (err) => {
       if (err.hasOwnProperty('message')) {
